@@ -105,12 +105,17 @@ const jwt = require('jsonwebtoken');
 const Product = require('./models/Product');
 const User = require('./models/User');
 
+const { body, validationResult } = require('express-validator');
+
+const morgan = require('morgan');
+
 dotenv.config();
 
 console.log('PORT:', process.env.PORT);
 console.log('MONGODB_URI:', process.env.MONGODB_URI);
 
 const app = express();
+app.use(morgan('combined'));
 app.use(express.json());
 
 const connectDB = async () => {
@@ -287,12 +292,28 @@ app.get('/admin/products', authenticateToken, isAdmin, async (req, res) => {
     }
 });
 
-app.post('/admin/create-product', authenticateToken, isAdmin, async (req, res) => {
-    const { name, description, price, quantity, imageUrl, features } = req.body;
+app.post('/admin/create-product', authenticateToken, isAdmin,
+    [
+        body('name').notEmpty(),
+        body('description').notEmpty(),
+        body('price').isNumeric(),
+        body('quantity').isNumeric(),
+        body('imageUrl').isURL(),
+        body('features').isObject(), // Проверяем, что features является объектом
+        body('type').notEmpty(),
+        // Добавьте другие правила валидации по необходимости
+    ],
+    async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, description, price, quantity, imageUrl, features, type } = req.body;
     const userId = req.user.id;
 
     try {
-        const newProduct = new Product({ name, description, price, quantity, imageUrl, features, userId });
+        const newProduct = new Product({ name, description, price, quantity, imageUrl, features, type, userId });
         await newProduct.save();
         res.json({ message: 'Product created successfully' });
     } catch (error) {
@@ -300,6 +321,7 @@ app.post('/admin/create-product', authenticateToken, isAdmin, async (req, res) =
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
