@@ -1,0 +1,79 @@
+.header {
+    display: flex;
+    /*position: fixed; !* Фиксированная позиция *!*/
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #8581ef;
+    color: #fff;
+    box-shadow: 0 11px 4px rgb(159, 177, 243);
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #430cc1; /* цвет для выделения */
+}
+
+.contact-info a {
+    font-size: 18px;
+    margin-right: 15px;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s; /* добавим плавный переход цвета */
+}
+
+.contact-info a:hover {
+    color: #11a5ca; /* изменяем цвет при наведении */
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+}
+
+.search-box input {
+    margin-right: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.search-box button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #e23120;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s; /* добавим плавный переход цвета */
+}
+
+.search-box button:hover {
+    background-color: #45d6fa; /* изменяем цвет при наведении */
+}
+
+.cart,
+.user-actions {
+    margin-left: 10px;
+}
+
+.cart button,
+.user-actions button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f13e2d;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s; /* добавим плавный переход цвета */
+}
+
+.cart button:hover,
+.user-actions button:hover {
+    background-color: #333; /* изменяем цвет при наведении */
+}
+
+
+
+
+

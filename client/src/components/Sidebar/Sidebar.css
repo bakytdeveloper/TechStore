@@ -1,0 +1,65 @@
+
+/* Sidebar.css */
+.sidebar {
+    position: fixed; /* Фиксированная позиция */
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 102px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    font-size: 16px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: color 0.3s; /* добавим плавный переход цвета */
+}
+
+li:hover {
+    color: #3de753; /* изменяем цвет при наведении */
+}
+
+
+/*.sidebar {*/
+/*    flex: 0 0 20%; !* Жестко фиксированная ширина боковой панели *!*/
+/*    padding: 20px;*/
+/*    background-color: #f0f0f0;*/
+/*    position: sticky;*/
+/*    top: 0;*/
+/*    height: 100vh;*/
+/*    overflow-y: auto;*/
+/*}*/
+
+/*h2 {*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*ul {*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*}*/
+
+/*li {*/
+/*    font-size: 16px;*/
+/*    margin-bottom: 5px;*/
+/*    cursor: pointer;*/
+/*    transition: color 0.3s; !* добавим плавный переход цвета *!*/
+/*}*/
+
+/*li:hover {*/
+/*    color: #3de753; !* изменяем цвет при наведении *!*/
+/*}*/
+
