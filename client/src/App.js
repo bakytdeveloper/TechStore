@@ -1,6 +1,4 @@
 
-
-// App.js
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -10,69 +8,40 @@ import axios from 'axios';
 
 const App = () => {
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:5500/products')
             .then(response => {
                 setProducts(response.data);
+                setFilteredProducts(response.data); // Начальное значение - все товары
             })
             .catch(error => console.error('Error fetching products:', error));
     }, []);
+
+    const handleTypeChange = (selectedType) => {
+        // Фильтруем товары по выбранному типу
+        const filtered = products.filter(product => product.type === selectedType);
+        setFilteredProducts(filtered);
+    };
+
+    const handleAllProductsClick = () => {
+        // Показываем все товары
+        setFilteredProducts(products);
+    };
 
     return (
         <div className="app">
             <Header />
             <div className="content">
-                <Sidebar />
-                <ProductList products={products} />
+                <Sidebar
+                    onTypeChange={handleTypeChange}
+                    onAllProductsClick={handleAllProductsClick}
+                />
+                <ProductList products={filteredProducts} />
             </div>
         </div>
     );
 };
 
 export default App;
-
-
-
-
-
-
-
-// import React, {useEffect, useState} from 'react';
-// import Header from './components/Header/Header';
-// import Sidebar from './components/Sidebar/Sidebar';
-// import './App.css';
-// import ProductCard from "./components/ProductCard/ProductCard";
-//
-// const App = () => {
-//     const [products, setProducts] = useState([]);
-//
-//     useEffect(() => {
-//         // Получаем товары из базы данных
-//         // Замените URL на актуальный URL вашего сервера
-//         fetch('http://localhost:5500/products')
-//             .then(response => response.json())
-//             .then(data => setProducts(data))
-//             .catch(error => console.error('Error fetching products:', error));
-//     }, []);
-//
-//
-//     return (
-//         <div className="app">
-//
-//             <Header />
-//
-//             <div className="main-content">
-//                 <Sidebar />
-//                 <div className="product-grid">
-//                     {products.map(product => (
-//                         <ProductCard key={product._id} product={product} />
-//                     ))}
-//                 </div>
-//             </div>
-//
-//         </div>
-//     );
-// };
-//
-// export default App;

@@ -1,12 +1,20 @@
 .header {
     display: flex;
-    /*position: fixed; !* Фиксированная позиция *!*/
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Устанавливает z-index, чтобы Header оставался поверх остального контента */
+    background-color: #2cb7ee; /* Замените на ваш фоновый цвет */
+
+
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #8581ef;
+    /*background-color: #8581ef;*/
     color: #fff;
-    box-shadow: 0 11px 4px rgb(159, 177, 243);
+    box-shadow: 0 11px 4px rgba(40, 149, 221, 0.5);
 }
 
 .logo {
@@ -33,7 +41,7 @@
 }
 
 .search-box input {
-    margin-right: 10px;
+    margin-right: 20px;
     padding: 10px;
     font-size: 16px;
 }

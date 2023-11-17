@@ -1,9 +1,10 @@
-/* ProductList.css */
+
 .product-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end; /* Располагаем справа от Sidebar */
     gap: 4px; /* Расстояние между карточками */
-    margin-top: 20px; /* Добавим отступ сверху для визуального разделения от Sidebar */
+    margin-top: 120px; /* Добавим отступ сверху для визуального разделения от Sidebar */
     padding-right: 35px;
 }
+
