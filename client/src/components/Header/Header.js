@@ -1,7 +1,17 @@
-import React from 'react';
+
+import React, {useState} from 'react';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onSearch }) => {
+
+    const [searchText, setSearchText] = useState('');
+
+    const handleSearchChange = (event) => {
+        const text = event.target.value;
+        setSearchText(text);
+        onSearch(text); // Передаем текст для фильтрации
+    };
+
     return (
         <div className="header">
             <div className="logo">NURStore</div>
@@ -15,7 +25,12 @@ const Header = () => {
                 <a href="tel:+XXXXXXXXXX">XXX-XX-XX-XX</a>
             </div>
             <div className="search-box">
-                <input type="text" placeholder="Поиск товара" />
+                <input
+                    type="text"
+                    placeholder="Поиск товаров..."
+                    value={searchText}
+                    onChange={handleSearchChange}
+                />
                 {/*<button>Поиск</button>*/}
             </div>
             <div className="cart">

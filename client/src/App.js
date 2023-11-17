@@ -1,4 +1,5 @@
 
+// App.js
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -14,25 +15,31 @@ const App = () => {
         axios.get('http://localhost:5500/products')
             .then(response => {
                 setProducts(response.data);
-                setFilteredProducts(response.data); // Начальное значение - все товары
+                setFilteredProducts(response.data);
             })
             .catch(error => console.error('Error fetching products:', error));
     }, []);
 
     const handleTypeChange = (selectedType) => {
-        // Фильтруем товары по выбранному типу
         const filtered = products.filter(product => product.type === selectedType);
         setFilteredProducts(filtered);
     };
 
     const handleAllProductsClick = () => {
-        // Показываем все товары
         setFilteredProducts(products);
+    };
+
+    const handleSearch = (text) => {
+        const filtered = products.filter(product =>
+            product.name.toLowerCase().includes(text.toLowerCase()) ||
+            product.type.toLowerCase().includes(text.toLowerCase())
+        );
+        setFilteredProducts(filtered);
     };
 
     return (
         <div className="app">
-            <Header />
+            <Header onSearch={handleSearch} />
             <div className="content">
                 <Sidebar
                     onTypeChange={handleTypeChange}
