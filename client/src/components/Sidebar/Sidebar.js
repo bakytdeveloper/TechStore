@@ -52,4 +52,3 @@ const Sidebar = ({ onTypeChange, onAllProductsClick }) => {
 };
 
 export default Sidebar;
-
