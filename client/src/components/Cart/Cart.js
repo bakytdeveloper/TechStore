@@ -1,8 +1,9 @@
 // Cart.js
+
 import React from 'react';
 import './Cart.css';
 
-const Cart = ({ isOpen, closeCart, cartItems, buyItems }) => {
+const Cart = ({ isOpen, closeCart, cartItems }) => {
     return (
         <div className={`cart-overlay ${isOpen ? 'open' : ''}`}>
             <div className="cart-content">
@@ -13,19 +14,18 @@ const Cart = ({ isOpen, closeCart, cartItems, buyItems }) => {
                     {cartItems.length === 0 ? (
                         <p>Вы пока что ничего не заказали.</p>
                     ) : (
-                        <ul>
-                            {cartItems.map((item) => (
-                                <li key={item.id}>
-                                    {/* Отобразите информацию о товаре в корзине, например, item.name, item.price и т.д. */}
-                                    {item.name} - {item.price} руб.
-                                </li>
-                            ))}
-                        </ul>
+                        cartItems.map((item) => (
+                            <div key={item.id} className="cart-item">
+                                <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
+                                <div className="cart-item-details">
+                                    <p className="cart-item-name">{item.name}</p>
+                                    <p className="cart-item-price">{item.price} руб.</p>
+                                </div>
+                            </div>
+                        ))
                     )}
                 </div>
-                <button className="buy-button" onClick={buyItems}>
-                    Купить
-                </button>
+                <button className="buy-button">Купить</button>
             </div>
         </div>
     );

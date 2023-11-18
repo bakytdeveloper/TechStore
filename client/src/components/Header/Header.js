@@ -1,3 +1,6 @@
+
+//
+//
 //
 // import React, {useState} from 'react';
 // import './Header.css';
@@ -12,6 +15,17 @@
 //         setSearchText(text);
 //         onSearch(text); // Передаем текст для фильтрации
 //     };
+//
+//     const [isCartOpen, setIsCartOpen] = useState(false);
+//
+//     const handleCartClick = () => {
+//         setIsCartOpen(!isCartOpen);
+//     };
+//
+//     const closeCart = () => {
+//         setIsCartOpen(false);
+//     };
+//
 //
 //     return (
 //         <div className="header">
@@ -35,8 +49,10 @@
 //                 {/*<button>Поиск</button>*/}
 //             </div>
 //             <div className="cart">
-//                 <button className="cart">Корзина</button>
+//                 <button className="cart-button" onClick={handleCartClick}>Корзина</button>
 //             </div>
+//             <Cart isOpen={isCartOpen} closeCart={closeCart} cartItems={[]} />
+//
 //             <div className="user-actions">
 //                 <button>Логин</button>
 //                 <button>Регистрация</button>
@@ -51,32 +67,50 @@
 
 
 
+
+
+
+
+
+
+
+
 import React, {useState} from 'react';
 import './Header.css';
 import Cart from "../Cart/Cart";
+import Auth from "../Auth/Auth";
 
 const Header = ({ onSearch }) => {
 
     const [searchText, setSearchText] = useState('');
-
-    const [isCartOpen, setIsCartOpen] = useState(false);
-
-    const openCart = () => {
-        setIsCartOpen(true);
-    };
-
-    const closeCart = () => {
-        setIsCartOpen(false);
-    };
-
-
-
 
     const handleSearchChange = (event) => {
         const text = event.target.value;
         setSearchText(text);
         onSearch(text); // Передаем текст для фильтрации
     };
+
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isAuthOpen, setIsAuthOpen] = useState(false);
+
+
+    const handleCartClick = () => {
+        setIsCartOpen(!isCartOpen);
+    };
+
+
+    const closeCart = () => {
+        setIsCartOpen(false);
+    };
+
+    const openAuth = () => {
+        setIsAuthOpen(true);
+    };
+
+    const closeAuth = () => {
+        setIsAuthOpen(false);
+    };
+
 
     return (
         <div className="header">
@@ -100,19 +134,30 @@ const Header = ({ onSearch }) => {
                 {/*<button>Поиск</button>*/}
             </div>
             <div className="cart">
-                <button  className="cart-icon" onClick={openCart}>Корзина</button>
+                <button className="cart-button" onClick={handleCartClick}>Корзина</button>
             </div>
+            <Cart isOpen={isCartOpen} closeCart={closeCart} cartItems={[]} />
 
-            <Cart isOpen={isCartOpen} closeCart={closeCart} cartItems={[]} buyItems={() => {}} />
+            <Auth isOpen={isAuthOpen} closeAuth={closeAuth} />
 
             <div className="user-actions">
-                <button>Логин</button>
+                <button className="login-button" onClick={openAuth}>Логин</button>
                 <button>Регистрация</button>
+
             </div>
+
         </div>
+
     );
 };
 
 export default Header;
+
+
+
+
+
+
+
 
 
