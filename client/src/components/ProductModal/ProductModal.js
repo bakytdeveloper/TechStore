@@ -19,7 +19,7 @@ const ProductModal = ({ isOpen, closeModal, product }) => {
 
     if (!isOpen || !product) {
         return null;
-    }
+    };
 
 
     const handleOverlayClick = (e) => {
