@@ -1,12 +1,34 @@
 // ProductModal.js
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import './ProductModal.css';
 
 const ProductModal = ({ isOpen, closeModal, product }) => {
-    if (!isOpen) {
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isOpen]);
+
+    if (!isOpen || !product) {
         return null;
     }
+
+
+    const handleOverlayClick = (e) => {
+        // Закрываем модальное окно только при клике на overlay
+        if (e.target.classList.contains('modal-overlay')) {
+            closeModal();
+        }
+    };
+
 
     // Деструктуризация данных о продукте
     const { imageUrl, name, description, features } = product;
@@ -15,8 +37,9 @@ const ProductModal = ({ isOpen, closeModal, product }) => {
         console.log(product)
     }
 
+
     return (
-        <div className="modal-overlay">
+        <div className="modal-overlay"  onClick={handleOverlayClick}>
             <div className="modal-content">
                 <div className="modal-header">
                     <img src={imageUrl} alt={name} className="modal-image" />
@@ -40,7 +63,7 @@ const ProductModal = ({ isOpen, closeModal, product }) => {
                 </div>
                 <div className="modal-footer">
                     <button onClick={closeModal}>Выход</button>
-                    <button onClick={() => handleOrder(product)}>Заказать</button>
+                    <button onClick={() => handleOrder(product)}>Добавить в корзину</button>
                 </div>
             </div>
         </div>
