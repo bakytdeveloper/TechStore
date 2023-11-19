@@ -98,6 +98,9 @@
 
 .register-head {
     color: blue;
+    text-shadow: 2px 2px 2px #0ac6b0;
+    text-align: center;
+
 }
 .login-head {
     color: blue;

@@ -88,6 +88,17 @@
     background-color: #16a0e0; /* изменяем цвет при наведении */
 }
 
+.cart-button {
+    font-size: 35px;
+   color: #2b057e;
+    cursor: pointer;
+}
+
+.cart-button:hover {
+    font-size: 35px;
+   color: #347ce7;
+    cursor: pointer;
+}
 
 
 

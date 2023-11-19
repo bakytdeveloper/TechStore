@@ -134,7 +134,9 @@ const Header = ({ onSearch }) => {
                 {/*<button>Поиск</button>*/}
             </div>
             <div className="cart">
-                <button className="cart-button" onClick={handleCartClick}>Корзина</button>
+                <i className="fa-solid fa-cart-shopping cart-button"
+                   onClick={handleCartClick}></i>
+                {/*<button className="cart-button" onClick={handleCartClick}>Корзина</button>*/}
             </div>
             <Cart isOpen={isCartOpen} closeCart={closeCart} cartItems={[]} />
 
