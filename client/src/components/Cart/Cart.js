@@ -4,6 +4,8 @@ import React from 'react';
 import './Cart.css';
 
 const Cart = ({ isOpen, closeCart, cartItems }) => {
+    console.log(cartItems)
+
     return (
         <div className={`cart-overlay ${isOpen ? 'open' : ''}`}>
             <div className="cart-content">

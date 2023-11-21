@@ -11,6 +11,8 @@ const App = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
+    const [cartItems, setCartItems] = useState([]);
+
     useEffect(() => {
         axios.get('http://localhost:5500/products')
             .then(response => {
@@ -37,29 +39,62 @@ const App = () => {
         setFilteredProducts(filtered);
     };
 
+    // const addToCart = (productId) => {
+    //     axios.post('http://localhost:5500/cart/add', { productId })
+    //         .then(response => {
+    //             console.log(response.data.message);
+    //             // Обновление корзины после успешного добавления товара
+    //             axios.get('http://localhost:5500/cart')
+    //                 .then(response => setCartItems(response.data))
+    //                 .catch(error => console.error('Error fetching cart:', error));
+    //         })
+    //         .catch(error => console.error('Error adding to cart:', error));
+    // };
+
+
+    const addToCart = (productId) => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('No token available');
+            return;
+        }
+
+        axios.post('http://localhost:5500/cart/add', { productId }, {
+            headers: {
+                'Authorization': token,
+            },
+        })
+            .then(response => {
+                console.log(response.data.message);
+                // Обновление корзины после успешного добавления товара
+                axios.get('http://localhost:5500/cart', {
+                    headers: {
+                        'Authorization': token,
+                    },
+                })
+                    .then(response => setCartItems(response.data))
+                    .catch(error => console.error('Error fetching cart:', error));
+            })
+            .catch(error => console.error('Error adding to cart:', error));
+    };
+
+
     return (
         <div className="app">
-            <Header onSearch={handleSearch} />
+            <Header onSearch={handleSearch} cartItems={cartItems} />
+            {/*<Header onSearch={handleSearch} />*/}
             <div className="content">
                 <Sidebar
                     onTypeChange={handleTypeChange}
                     onAllProductsClick={handleAllProductsClick}
                 />
-                <ProductList products={filteredProducts} />
+                <ProductList products={filteredProducts} addToCart={addToCart} />
+
+                {/*<ProductList products={filteredProducts} />*/}
             </div>
         </div>
     );
 };
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
