@@ -17,11 +17,11 @@ const Cart = ({ isOpen, closeCart, cartItems }) => {
                         <p>Вы пока что ничего не заказали.</p>
                     ) : (
                         cartItems.map((item) => (
-                            <div key={item.id} className="cart-item">
-                                <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
+                            <div key={item._id} className="cart-item">
+                                <img src={item.product.imageUrl} alt={item.product.name} className="cart-item-image" />
                                 <div className="cart-item-details">
-                                    <p className="cart-item-name">{item.name}</p>
-                                    <p className="cart-item-price">{item.price} руб.</p>
+                                    <p className="cart-item-name">{item.product.name}</p>
+                                    <p className="cart-item-price">{item.product.price} руб.</p>
                                 </div>
                             </div>
                         ))

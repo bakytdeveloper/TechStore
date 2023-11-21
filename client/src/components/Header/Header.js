@@ -6,7 +6,7 @@ import './Header.css';
 import Cart from "../Cart/Cart";
 import Auth from "../Auth/Auth";
 
-const Header = ({ onSearch, cartItems }) => {
+const Header = ({ onSearch, onCartClick }) => {
 
     const [searchText, setSearchText] = useState('');
 
@@ -60,11 +60,18 @@ const Header = ({ onSearch, cartItems }) => {
                 {/*<button>Поиск</button>*/}
             </div>
             <div className="cart">
+                {/*<i className="fa-solid fa-cart-shopping cart-button"*/}
+                {/*   onClick={onCartClick}*/}
+                {/*   onClick={handleCartClick}*/}
+                {/* ></i>*/}
+
                 <i className="fa-solid fa-cart-shopping cart-button"
-                   onClick={handleCartClick}></i>
+                   onClick={onCartClick}
+
+                 ></i>
                 {/*<button className="cart-button" onClick={handleCartClick}>Корзина</button>*/}
             </div>
-            <Cart isOpen={isCartOpen} closeCart={closeCart} cartItems={[]} />
+            {/*<Cart isOpen={isCartOpen} closeCart={closeCart} cartItems={[]} />*/}
 
             <Auth isOpen={isAuthOpen} closeAuth={closeAuth} closeLogin={closeAuth} />
 
@@ -83,7 +90,6 @@ const Header = ({ onSearch, cartItems }) => {
 };
 
 export default Header;
-
 
 
 
