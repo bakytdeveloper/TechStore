@@ -72,4 +72,3 @@ const ProductModal = ({ isOpen, closeModal, product }) => {
 
 export default ProductModal;
 
-
